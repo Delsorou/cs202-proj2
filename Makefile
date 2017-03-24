@@ -17,7 +17,7 @@ CFLAGS=-c -Wall -std=c++11
 LDFLAGS=
 SOURCES=polynomial.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=bankacct
+EXECUTABLE=polynomial
 
 all : $(SOURCES) $(EXECUTABLE)
 
