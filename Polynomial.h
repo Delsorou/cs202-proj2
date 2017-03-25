@@ -31,5 +31,6 @@ public:
 	void Add_2_Polynomials(Polynomial, Polynomial);
 
 	Polynomial operator+(const Polynomial&);
+	Polynomial operator-(const Polynomial&);
 };
 #endif // POLYNOMIAL_H

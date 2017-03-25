@@ -93,3 +93,21 @@ Polynomial Polynomial::operator+(const Polynomial& p1)
 
 	return p2;
 }
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator-(const Polynomial&)
+DESCRIPTION:       Overloaded subtraction operator for Polynomial class
+RETURNS:           Polynomial
+NOTES:             None
+----------------------------------------------------------------------------- */
+Polynomial Polynomial::operator-(const Polynomial& p1)
+{
+	Polynomial p2;
+
+	p2.deg = MAX(deg, p1.deg);
+
+	for (int i = p2.deg; i >= 0; --i)
+		p2.cof[i] = cof[i] - p1.cof[i];
+
+	return p2;
+}

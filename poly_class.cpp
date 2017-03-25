@@ -33,7 +33,7 @@ int main(int argc, char * argv[])
 		poly[n].display_poly();
     }
 
-    poly[2] = poly[0] + poly[1];
+    poly[2] = poly[0] - poly[1];
 
 	poly[2].display_poly();
 
