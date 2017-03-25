@@ -1,23 +1,24 @@
 # ------------------------------------------------------------------------------
-# FILE NAME:    Makefile
+# FILE:         Makefile
 #
-# DESCRIPTION:  Makefile for Spring 2017 CS202 Project 1: Bank Account
+# DESCRIPTION:  Makefile for Spring 2017 CS202 Project 2: Polynomial Class
 #
-# PURPOSE:      Build the Bank Account project
+# NOTES:        None
 #
 # MODIFICATION HISTORY:
 #
 # Author        Date          Modification(s)
 # -----------   ----------    ---------------
-# Aaryna Irwin  2017-02-21    0.1 - Initial version
+# Aaryna Irwin  2017-03-25    0.1 - Initial version
 # ------------------------------------------------------------------------------
 
 CC=g++
 CFLAGS=-c -Wall -std=c++11
 LDFLAGS=
-SOURCES=polynomial.cpp
+SOURCES=Polynomial.cpp poly_class.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=polynomial
+### DO NOT SHARE EXE NAME WITH SOURCE FILES ###
+EXECUTABLE=poly_test
 
 all : $(SOURCES) $(EXECUTABLE)
 
@@ -27,6 +28,5 @@ $(EXECUTABLE) : $(OBJECTS)
 .cpp.o :
 	$(CC) $(CFLAGS) $< -o $@
 
-# ... why doesn't this work properly...
-#clean :
-#	rm $(OBJECTS) $(EXECUTABLE)
+clean :
+	rm $(OBJECTS) $(EXECUTABLE)
