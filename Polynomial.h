@@ -28,14 +28,10 @@ private:
     int deg = 0;
     int cof[9] = {};
 public:
-	void get_poly();
-	void display_poly();
-
 	Polynomial operator+(const Polynomial&);
 	Polynomial operator-(const Polynomial&);
 
-	// Implement tomorrow. Sleep now.
-//	friend ostream& operator<<(ostream&, const Polynomial&);
-//	friend istream& operator>>(istream&, Polynomial&);
+	friend std::ostream& operator<<(std::ostream&, const Polynomial&);
+	friend std::istream& operator>>(std::istream&, Polynomial&);
 };
 #endif // POLYNOMIAL_H

@@ -19,45 +19,46 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 #include "Polynomial.h"
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          get_poly()
+FUNCTION:          operator>>(istream&, Polynomial&)
 DESCRIPTION:       User input function
 RETURNS:           Void function
 NOTES:             None
 ----------------------------------------------------------------------------- */
-void Polynomial::get_poly()
+std::istream& operator>>(std::istream& is, Polynomial& in)
 {
 	std::cout << "\nEnter degree of polynomial: ";
-	std::cin >> deg;
+	is >> in.deg;
 
-    std::cout << "\nEnter the " << deg+1 << " cofficients: ";
+	std::cout << "\nEnter the " << in.deg + 1 << " cofficients: ";
 
-    for (int i = deg; i >= 0; --i)
-        std::cin >> cof[i];
+	for (int i = in.deg; i >= 0; --i)
+		is >> in.cof[i];
+
+	return is;
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          display_poly()
-DESCRIPTION:       Print function
-RETURNS:           Void function
+FUNCTION:          operator<<(ostream&, const Polynomial&)
+DESCRIPTION:       Overloaded stream insertion operator for Polynomial class
+RETURNS:           ostream&
 NOTES:             None
 ----------------------------------------------------------------------------- */
-void Polynomial::display_poly()
+std::ostream& operator<<(std::ostream& os, const Polynomial& out)
 {
-    std::cout << "\n\t";
-
-    for (int i = deg; i >= 0; --i)
+    for (int i = out.deg; i >= 0; --i)
     {
-	if (i < deg)
-	{
-	    if (cof[i] >= 0) std::cout << " +";
-	    else std::cout << " ";
-	}
-	std::cout << cof[i];
+		if (i < out.deg)
+		{
+		   	if (out.cof[i] >= 0) os << " +";
+			else os << " ";
+		}
+		os << out.cof[i];
 
-	if (i > 1) std::cout << "x^" << i;
-	if (i == 1) std::cout << "x";
+		if (i > 1) os << "x^" << i;
+		if (i == 1) os << "x";
     }
-    std::cout << std::endl;
+
+	return os;
 }
 
 /* -----------------------------------------------------------------------------

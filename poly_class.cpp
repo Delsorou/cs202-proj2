@@ -15,27 +15,29 @@ Author                  Date               Version
 Aaryna Irwin            2017-03-17         0.1 - Initial
 
 ----------------------------------------------------------------------------- */
+
 #include "Polynomial.h"
+#include <iostream>
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          main()
+FUNCTION:          main(const int, const char**)
 DESCRIPTION:       There your function.
 RETURNS:           int
 NOTES:             None
 ----------------------------------------------------------------------------- */
-int main(int argc, char * argv[])
+int main(const int argc, const char* argv[])
 {
     Polynomial poly[3];
 
     for (int n = 0; n < 2; ++n)
     {
-		poly[n].get_poly();
-		poly[n].display_poly();
+		std::cin >> poly[n];
+		std::cout << poly[n];
     }
 
     poly[2] = poly[0] - poly[1];
 
-	poly[2].display_poly();
+	std::cout << poly[2];
 
     return 0;
 }
