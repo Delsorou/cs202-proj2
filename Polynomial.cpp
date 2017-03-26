@@ -61,22 +61,6 @@ void Polynomial::display_poly()
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          Add_2_Polynomials(Polynomial, Polynomial)
-DESCRIPTION:       Add function
-RETURNS:           Void function
-NOTES:             None
------------------------------------------------------------------------------ */
-void Polynomial::Add_2_Polynomials(Polynomial p0, Polynomial p1)
-{
-    std::cout << "\nAdding the 2 polynomials: \n\n";
-
-    deg = MAX(p0.deg, p1.deg); 
-
-    for (int i = deg; i >= 0; i--)
-        cof[i] = cof[i] + cof[i];
-}
-
-/* -----------------------------------------------------------------------------
 FUNCTION:          operator+(const Polynomial&)
 DESCRIPTION:       Overloaded addition operator for Polynomial class
 RETURNS:           Polynomial
