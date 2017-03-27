@@ -32,12 +32,12 @@ int main(const int argc, const char* argv[])
     for (int n = 0; n < 2; ++n)
     {
 		std::cin >> poly[n];
-		std::cout << poly[n];
+		std::cout << std::endl << poly[n];
     }
 
     poly[2] = poly[0] - poly[1];
 
-	std::cout << poly[2];
+	std::cout << std::endl << poly[2] << std::endl;
 
     return 0;
 }

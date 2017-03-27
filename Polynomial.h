@@ -17,10 +17,13 @@ Author                  Date               Version
 Aaryna Irwin            2017-03-17         0.1 - Initial
 
 ----------------------------------------------------------------------------- */
+
+// Macro definitions
 #define MAX(x,y) ((x) > (y) ? (x) : (y))
 #define ARRAY_SIZE(a) sizeof(a)/sizeof(a[0])
 
-#include <iostream>
+// Includes
+#include <fstream>
 
 class Polynomial
 {
@@ -31,7 +34,10 @@ public:
 	Polynomial operator+(const Polynomial&);
 	Polynomial operator-(const Polynomial&);
 
+	// Friend functions for stream insertion/extraction
 	friend std::ostream& operator<<(std::ostream&, const Polynomial&);
 	friend std::istream& operator>>(std::istream&, Polynomial&);
+//	friend std::ostream& operator<<(std::ofstream&, const Polynomial&);
+//	friend std::istream& operator>>(std::ifstream&, Polynomial&);
 };
 #endif // POLYNOMIAL_H
