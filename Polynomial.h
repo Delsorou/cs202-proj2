@@ -23,7 +23,8 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 #define ARRAY_SIZE(a) sizeof(a)/sizeof(a[0])
 
 // Includes
-#include <fstream>
+#include <iostream>
+// #include <fstream>
 
 class Polynomial
 {
@@ -31,6 +32,7 @@ private:
     int deg = 0;
     int cof[9] = {};
 public:
+	Polynomial operator=(const Polynomial&);
 	Polynomial operator+(const Polynomial&);
 	Polynomial operator-(const Polynomial&);
 

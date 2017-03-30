@@ -17,7 +17,8 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 ----------------------------------------------------------------------------- */
 
 // Includes
-#include <fstream>
+#include <iostream>
+// #include <fstream>
 #include "Polynomial.h"
 
 /* -----------------------------------------------------------------------------
@@ -107,16 +108,19 @@ DESCRIPTION:       Overloaded addition operator for Polynomial class
 RETURNS:           Polynomial
 NOTES:             None
 ----------------------------------------------------------------------------- */
-Polynomial Polynomial::operator+(const Polynomial& p1)
+Polynomial Polynomial::operator+(const Polynomial& rVal)
 {
-	Polynomial p2;
+	// Return value buffer
+	Polynomial sum;
 
-	p2.deg = MAX(deg, p1.deg);
+	// Set degree of result
+	sum.deg = MAX(deg, rVal.deg);
 
-	for (int i = p2.deg; i >= 0; --i)
-		p2.cof[i] = cof[i] + p1.cof[i];
+	// Add each coefficient of like terms
+	for (int i = sum.deg; i >= 0; --i)
+		sum.cof[i] = cof[i] + rVal.cof[i];
 
-	return p2;
+	return sum;
 }
 
 /* -----------------------------------------------------------------------------
@@ -125,14 +129,38 @@ DESCRIPTION:       Overloaded subtraction operator for Polynomial class
 RETURNS:           Polynomial
 NOTES:             None
 ----------------------------------------------------------------------------- */
-Polynomial Polynomial::operator-(const Polynomial& p1)
+Polynomial Polynomial::operator-(const Polynomial& rVal)
 {
-	Polynomial p2;
+	// Return value buffer
+	Polynomial diff;
+	
+	// Set degree of result
+	diff.deg = MAX(deg, rVal.deg);
 
-	p2.deg = MAX(deg, p1.deg);
+	// Subtract each coefficient of like terms
+	for (int i = diff.deg; i >= 0; --i)
+		diff.cof[i] = cof[i] - rVal.cof[i];
 
-	for (int i = p2.deg; i >= 0; --i)
-		p2.cof[i] = cof[i] - p1.cof[i];
+	return diff;
+}
 
-	return p2;
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator=(const Polynomial&)
+DESCRIPTION:       Overloaded assignment operator for Polynomial class
+RETURNS:           Polynomial
+NOTES:             None
+----------------------------------------------------------------------------- */
+Polynomial Polynomial::operator=(const Polynomial& rVal)
+{
+	// Return value buffer
+	Polynomial res;
+
+	// Set degree of lvalue directly
+	res.deg = rVal.deg;
+	
+	// Copy coefficients from rvalue to lvalue
+	for (int i = deg; i >= 0; --i)
+		res.cof[i] = rVal.cof[i];
+
+	return res;
 }
