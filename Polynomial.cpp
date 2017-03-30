@@ -150,17 +150,12 @@ DESCRIPTION:       Overloaded assignment operator for Polynomial class
 RETURNS:           Polynomial
 NOTES:             None
 ----------------------------------------------------------------------------- */
-Polynomial Polynomial::operator=(const Polynomial& rVal)
+Polynomial& Polynomial::operator=(const Polynomial rVal) noexcept
 {
-	// Return value buffer
-	Polynomial res;
-
-	// Set degree of lvalue directly
-	res.deg = rVal.deg;
+	this->deg = rVal.deg;
 	
-	// Copy coefficients from rvalue to lvalue
-	for (int i = deg; i >= 0; --i)
-		res.cof[i] = rVal.cof[i];
+	for (int i = this->deg; i >= 0; --i)
+		this->cof[i] = rVal.cof[i];
 
-	return res;
+	return *this;
 }

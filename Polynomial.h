@@ -32,7 +32,7 @@ private:
     int deg = 0;
     int cof[9] = {};
 public:
-	Polynomial operator=(const Polynomial&);
+	Polynomial& operator=(const Polynomial) noexcept;
 	Polynomial operator+(const Polynomial&);
 	Polynomial operator-(const Polynomial&);
 
