@@ -150,6 +150,30 @@ Polynomial Polynomial::operator*(const Polynomial& rVal)
 }
 
 /* -----------------------------------------------------------------------------
+FUNCTION:          operator==(const Polynomial&)
+DESCRIPTION:       Overloaded equivalency operator for Polynomial class
+RETURNS:           bool
+NOTES:             None
+----------------------------------------------------------------------------- */
+bool Polynomial::operator==(const Polynomial& rVal)
+{
+	// Return value buffer
+	bool isEqual = false;
+	
+	if (deg == rVal.deg)
+	{
+		isEqual = true;
+		for (int i = deg; i >= 0; --i)
+		{
+			if (cof[i] != rVal.cof[i])
+				isEqual = false;
+		}
+	}	
+
+	return isEqual;
+}
+
+/* -----------------------------------------------------------------------------
 FUNCTION:          operator>>(istream&, Polynomial&)
 DESCRIPTION:       Overloaded stream extraction operator for Polynomial class
 RETURNS:           istream&

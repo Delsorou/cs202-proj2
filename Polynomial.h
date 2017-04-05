@@ -43,11 +43,14 @@ public:
 	// Default destructor (placeholder - nothing to destroy yet)
 	virtual ~Polynomial();
 	
-	// Operator overloads
+	// Assignment operator overloads
 	Polynomial& operator=(const Polynomial) noexcept;
 	Polynomial operator+(const Polynomial&);
 	Polynomial operator-(const Polynomial&);
 	Polynomial operator*(const Polynomial&);
+	
+	// Comparison operator overloads
+	bool operator==(const Polynomial&);
 
 	// Friend functions for stream insertion/extraction
 	friend std::ostream& operator<<(std::ostream&, const Polynomial&);

@@ -34,10 +34,8 @@ int main(const int argc, const char* argv[])
 		std::cin >> poly[n];
 		std::cout << std::endl << poly[n];
     }
-
-    poly[2] = poly[0] * poly[1];
-
-	std::cout << std::endl << poly[2] << std::endl;
+	
+	std::cout << std::endl << std::boolalpha << (poly[0] == poly[1]) << std::endl;
 
     return 0;
 }
