@@ -33,7 +33,7 @@ private:
     int cof[9];
 public:
 	Polynomial();
-//	Polynomial(Polynomial&);
+	Polynomial(const Polynomial&);
 //	virtual ~Polynomial();
 	Polynomial& operator=(const Polynomial) noexcept;
 	Polynomial operator+(const Polynomial&);

@@ -31,7 +31,6 @@ NOTES:             None
 Polynomial::Polynomial()
 {
 	deg = 0;
-	// Reverse assignment... why the hell not?
 	for (int i = 8; i >= 0; --i)
 		cof[i] = 0;
 }
@@ -42,12 +41,12 @@ DESCRIPTION:       Overloaded constructor function for Polynomial class
 RETURNS:           N/A
 NOTES:             Constructs a polynomial from another
 ----------------------------------------------------------------------------- */
-//Polynomial::Polynomial(Polynomial& in)
-//{
-//	deg = in.deg;
-//	for (int i = deg; i >= 0; --i)
-//		cof[i] = in.cof[i];
-//}
+Polynomial::Polynomial(const Polynomial& in)
+{
+	deg = in.deg;
+	for (int i = deg; i >= 0; --i)
+		cof[i] = in.cof[i];
+}
 
 /* -----------------------------------------------------------------------------
 FUNCTION:          ~Polynomial()
