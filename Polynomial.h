@@ -45,11 +45,11 @@ public:
 	// Assignment operator overloads
 	Polynomial& operator=(const Polynomial) noexcept;
 	Polynomial operator+(const Polynomial&);
-	Polynomial operator+=(const Polynomial& rVal) { return *this + rVal; };
+	Polynomial& operator+=(const Polynomial&);
 	Polynomial operator-(const Polynomial&);
-	Polynomial operator-=(const Polynomial& rVal) { return *this - rVal; };
+	Polynomial& operator-=(const Polynomial&);
 	Polynomial operator*(const Polynomial&);
-	Polynomial operator*=(const Polynomial& rVal) { return *this * rVal; };
+	Polynomial& operator*=(const Polynomial&);
 	
 	// Comparison operator overloads
 	bool operator==(const Polynomial&);

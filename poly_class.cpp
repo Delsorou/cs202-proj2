@@ -18,6 +18,7 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 
 #include "Polynomial.h"
 #include <iostream>
+#include <iomanip>
 
 /* -----------------------------------------------------------------------------
 FUNCTION:          main(const int, const char**)
@@ -34,7 +35,13 @@ int main(const int argc, const char* argv[])
 		std::cin >> poly[n];
     }
 	
-	std::cout << std::endl << poly[0](1) << std::endl;
+	std::cout << std::right
+		<< std::setw(30) << "The first polynomial is: " << poly[0] << std::endl
+		<< std::setw(30) << "The second polynomial is: " << poly[1] << std::endl
+		<< std::setw(30) << "Their sum is: " << poly[0] + poly[1] << std::endl;
+	poly[2] = poly[0];
+	poly[2] += poly[1];
+	std::cout << std::setw(30) << "Compound operation: " << poly[2] << std::endl;
 
     return 0;
 }

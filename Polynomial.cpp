@@ -93,16 +93,29 @@ NOTES:             None
 Polynomial Polynomial::operator+(const Polynomial& rVal)
 {
 	// Return value buffer
-	Polynomial sum;
+	Polynomial lVal;
 
 	// Set degree of result
-	sum.deg = MAX(deg, rVal.deg);
+	lVal.deg = MAX(deg, rVal.deg);
 
 	// Add each coefficient of like terms
-	for (int i = sum.deg; i >= 0; --i)
-		sum.cof[i] = cof[i] + rVal.cof[i];
+	for (int i = lVal.deg; i >= 0; --i)
+		lVal.cof[i] = cof[i] + rVal.cof[i];
 
-	return sum;
+	return lVal;
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator+=(const Polynomial&)
+DESCRIPTION:       Overloaded compound addition assignment for Polynomial class
+RETURNS:           Polynomial&
+NOTES:             None
+----------------------------------------------------------------------------- */
+Polynomial& Polynomial::operator+=(const Polynomial& rVal)
+{
+	*this = *this + rVal;
+
+	return *this;
 }
 
 /* -----------------------------------------------------------------------------
@@ -114,16 +127,29 @@ NOTES:             None
 Polynomial Polynomial::operator-(const Polynomial& rVal)
 {
 	// Return value buffer
-	Polynomial diff;
+	Polynomial lVal;
 	
 	// Set degree of result
-	diff.deg = MAX(deg, rVal.deg);
+	lVal.deg = MAX(deg, rVal.deg);
 
 	// Subtract each coefficient of like terms
-	for (int i = diff.deg; i >= 0; --i)
-		diff.cof[i] = cof[i] - rVal.cof[i];
+	for (int i = lVal.deg; i >= 0; --i)
+		lVal.cof[i] = cof[i] - rVal.cof[i];
 
-	return diff;
+	return lVal;
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator-=(const Polynomial&)
+DESCRIPTION:       Overloaded compound subtr assignment for Polynomial class
+RETURNS:           Polynomial&
+NOTES:             None
+----------------------------------------------------------------------------- */
+Polynomial& Polynomial::operator-=(const Polynomial& rVal)
+{
+	*this = *this - rVal;
+
+	return *this;
 }
 
 /* -----------------------------------------------------------------------------
@@ -148,6 +174,19 @@ Polynomial Polynomial::operator*(const Polynomial& rVal)
 	}
 
 	return lVal;
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator*=(const Polynomial&)
+DESCRIPTION:       Overloaded compound multipl assignment for Polynomial class
+RETURNS:           Polynomial&
+NOTES:             None
+----------------------------------------------------------------------------- */
+Polynomial& Polynomial::operator*=(const Polynomial& rVal)
+{
+	*this = *this * rVal;
+
+	return *this;
 }
 
 /* -----------------------------------------------------------------------------
