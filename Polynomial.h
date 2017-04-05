@@ -34,19 +34,20 @@ public:
 	// Default constructor
 	Polynomial();
 
+	// Overloaded constructor
+	Polynomial(std::istream&);
+
 	// Copy constructor
 	Polynomial(const Polynomial&);
 
 	// Default destructor (placeholder - nothing to destroy yet)
 	virtual ~Polynomial();
-
-	// Overloaded constructor
-	Polynomial(std::istream&);
 	
 	// Operator overloads
 	Polynomial& operator=(const Polynomial) noexcept;
 	Polynomial operator+(const Polynomial&);
 	Polynomial operator-(const Polynomial&);
+	Polynomial operator*(const Polynomial&);
 
 	// Friend functions for stream insertion/extraction
 	friend std::ostream& operator<<(std::ostream&, const Polynomial&);

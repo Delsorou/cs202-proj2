@@ -34,6 +34,17 @@ Polynomial::Polynomial()
 }
 
 /* -----------------------------------------------------------------------------
+FUNCTION:          Polynomial(istream&)
+DESCRIPTION:       Construct directly from the stream
+RETURNS:           N/A
+NOTES:             Constructs a polynomial from stream input
+----------------------------------------------------------------------------- */
+Polynomial::Polynomial(std::istream& in)
+{
+	in >> *this;
+}
+
+/* -----------------------------------------------------------------------------
 FUNCTION:          Polynomial(const Polynomial&)
 DESCRIPTION:       Copy constructor function for Polynomial class
 RETURNS:           N/A
@@ -47,17 +58,6 @@ Polynomial::Polynomial(const Polynomial& in)
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          Polynomial(istream&)
-DESCRIPTION:       Construct directly from the stream
-RETURNS:           N/A
-NOTES:             Constructs a polynomial from stream input
------------------------------------------------------------------------------ */
-Polynomial::Polynomial(std::istream& in)
-{
-	in >> *this;
-}
-
-/* -----------------------------------------------------------------------------
 FUNCTION:          ~Polynomial()
 DESCRIPTION:       Default destructor function for Polynomial class
 RETURNS:           N/A
@@ -68,43 +68,19 @@ Polynomial::~Polynomial()
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          operator>>(istream&, Polynomial&)
-DESCRIPTION:       Overloaded stream extraction operator for Polynomial class
-RETURNS:           istream&
+FUNCTION:          operator=(const Polynomial&)
+DESCRIPTION:       Overloaded assignment operator for Polynomial class
+RETURNS:           Polynomial
 NOTES:             None
 ----------------------------------------------------------------------------- */
-std::istream& operator>>(std::istream& is, Polynomial& in)
+Polynomial& Polynomial::operator=(const Polynomial rVal) noexcept
 {
-	is >> in.deg;
+	this->deg = rVal.deg;
+	
+	for (int i = this->deg; i >= 0; --i)
+		this->cof[i] = rVal.cof[i];
 
-	for (int i = in.deg; i >= 0; --i)
-		is >> in.cof[i];
-
-	return is;
-}
-
-/* -----------------------------------------------------------------------------
-FUNCTION:          operator<<(ostream&, const Polynomial&)
-DESCRIPTION:       Overloaded stream insertion operator for Polynomial class
-RETURNS:           ostream&
-NOTES:             None
------------------------------------------------------------------------------ */
-std::ostream& operator<<(std::ostream& os, const Polynomial& out)
-{
-    for (int i = out.deg; i >= 0; --i)
-    {
-		if (i < out.deg)
-		{
-		   	if (out.cof[i] >= 0) os << " +";
-			else os << " ";
-		}
-		os << out.cof[i];
-
-		if (i > 1) os << "x^" << i;
-		if (i == 1) os << "x";
-    }
-
-	return os;
+	return *this;
 }
 
 /* -----------------------------------------------------------------------------
@@ -150,17 +126,65 @@ Polynomial Polynomial::operator-(const Polynomial& rVal)
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          operator=(const Polynomial&)
-DESCRIPTION:       Overloaded assignment operator for Polynomial class
+FUNCTION:          operator*(const Polynomial&)
+DESCRIPTION:       Overloaded multiplication operator for Polynomial class
 RETURNS:           Polynomial
 NOTES:             None
 ----------------------------------------------------------------------------- */
-Polynomial& Polynomial::operator=(const Polynomial rVal) noexcept
+Polynomial Polynomial::operator*(const Polynomial& rVal)
 {
-	this->deg = rVal.deg;
+	// Return value buffer
+	Polynomial lVal;
 	
-	for (int i = this->deg; i >= 0; --i)
-		this->cof[i] = rVal.cof[i];
+	// Set degree of result
+	lVal.deg = deg + rVal.deg;
 
-	return *this;
+	// Multiply each coefficient of like terms
+	for (int i = deg; i >= 0; --i)
+	{
+		for (int j = rVal.deg; j >= 0; --j)
+			lVal.cof[i + j] += cof[i] * rVal.cof[j];
+	}
+
+	return lVal;
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator>>(istream&, Polynomial&)
+DESCRIPTION:       Overloaded stream extraction operator for Polynomial class
+RETURNS:           istream&
+NOTES:             None
+----------------------------------------------------------------------------- */
+std::istream& operator>>(std::istream& is, Polynomial& in)
+{
+	is >> in.deg;
+
+	for (int i = in.deg; i >= 0; --i)
+		is >> in.cof[i];
+
+	return is;
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator<<(ostream&, const Polynomial&)
+DESCRIPTION:       Overloaded stream insertion operator for Polynomial class
+RETURNS:           ostream&
+NOTES:             None
+----------------------------------------------------------------------------- */
+std::ostream& operator<<(std::ostream& os, const Polynomial& out)
+{
+    for (int i = out.deg; i >= 0; --i)
+    {
+		if (i < out.deg)
+		{
+		   	if (out.cof[i] >= 0) os << " +";
+			else os << " ";
+		}
+		os << out.cof[i];
+
+		if (i > 1) os << "x^" << i;
+		if (i == 1) os << "x";
+    }
+
+	return os;
 }
