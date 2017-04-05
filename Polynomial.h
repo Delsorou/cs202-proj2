@@ -24,7 +24,6 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 
 // Includes
 #include <iostream>
-// #include <fstream>
 
 class Polynomial
 {
@@ -32,9 +31,19 @@ private:
     int deg;
     int cof[9];
 public:
+	// Default constructor
 	Polynomial();
+
+	// Copy constructor
 	Polynomial(const Polynomial&);
+
+	// Default destructor (placeholder - nothing to destroy yet)
 	virtual ~Polynomial();
+
+	// Overloaded constructor
+	Polynomial(std::istream&);
+	
+	// Operator overloads
 	Polynomial& operator=(const Polynomial) noexcept;
 	Polynomial operator+(const Polynomial&);
 	Polynomial operator-(const Polynomial&);
@@ -42,7 +51,5 @@ public:
 	// Friend functions for stream insertion/extraction
 	friend std::ostream& operator<<(std::ostream&, const Polynomial&);
 	friend std::istream& operator>>(std::istream&, Polynomial&);
-//	friend std::ostream& operator<<(std::ofstream&, const Polynomial&);
-//	friend std::istream& operator>>(std::ifstream&, Polynomial&);
 };
 #endif // POLYNOMIAL_H
