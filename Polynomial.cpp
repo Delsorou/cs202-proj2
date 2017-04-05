@@ -17,6 +17,7 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 ----------------------------------------------------------------------------- */
 
 // Includes
+#include <cmath>
 #include <iostream>
 #include "Polynomial.h"
 
@@ -171,6 +172,22 @@ bool Polynomial::operator==(const Polynomial& rVal)
 	}	
 
 	return isEqual;
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator()(const int)
+DESCRIPTION:       Overloaded function call operator for Polynomial class
+RETURNS:           int
+NOTES:             Evaluates polynomial at x = rVal
+----------------------------------------------------------------------------- */
+int Polynomial::operator()(const int val)
+{
+	int result = 0;
+
+	for (int i = deg; i >= 0; --i)
+		result += pow(val, deg - i) * cof[i];
+
+	return result;
 }
 
 /* -----------------------------------------------------------------------------

@@ -51,6 +51,10 @@ public:
 	
 	// Comparison operator overloads
 	bool operator==(const Polynomial&);
+//	bool operator!=(const Polynomial& rVal) { return !(*this == rVal); };
+
+	// Evaluation (function operator) overload
+	int operator()(const int);
 
 	// Friend functions for stream insertion/extraction
 	friend std::ostream& operator<<(std::ostream&, const Polynomial&);
