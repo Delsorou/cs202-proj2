@@ -37,7 +37,7 @@ Polynomial::Polynomial()
 
 /* -----------------------------------------------------------------------------
 FUNCTION:          Polynomial(Polynomial&)
-DESCRIPTION:       Overloaded constructor function for Polynomial class
+DESCRIPTION:       Copy constructor function for Polynomial class
 RETURNS:           N/A
 NOTES:             Constructs a polynomial from another
 ----------------------------------------------------------------------------- */
