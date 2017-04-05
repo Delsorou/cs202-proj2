@@ -29,9 +29,12 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 class Polynomial
 {
 private:
-    int deg = 0;
-    int cof[9] = {};
+    int deg;
+    int cof[9];
 public:
+	Polynomial();
+//	Polynomial(Polynomial&);
+//	virtual ~Polynomial();
 	Polynomial& operator=(const Polynomial) noexcept;
 	Polynomial operator+(const Polynomial&);
 	Polynomial operator-(const Polynomial&);

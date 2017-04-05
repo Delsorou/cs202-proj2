@@ -21,6 +21,44 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 // #include <fstream>
 #include "Polynomial.h"
 
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          Polynomial()
+DESCRIPTION:       Default constructor function for Polynomial class
+RETURNS:           N/A
+NOTES:             None
+----------------------------------------------------------------------------- */
+Polynomial::Polynomial()
+{
+	deg = 0;
+	// Reverse assignment... why the hell not?
+	for (int i = 8; i >= 0; --i)
+		cof[i] = 0;
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          Polynomial(Polynomial&)
+DESCRIPTION:       Overloaded constructor function for Polynomial class
+RETURNS:           N/A
+NOTES:             Constructs a polynomial from another
+----------------------------------------------------------------------------- */
+//Polynomial::Polynomial(Polynomial& in)
+//{
+//	deg = in.deg;
+//	for (int i = deg; i >= 0; --i)
+//		cof[i] = in.cof[i];
+//}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          ~Polynomial()
+DESCRIPTION:       Default destructor function for Polynomial class
+RETURNS:           N/A
+NOTES:             None
+----------------------------------------------------------------------------- */
+//Polynomial::~Polynomial()
+//{
+//}
+
 /* -----------------------------------------------------------------------------
 FUNCTION:          operator>>(ifstream&, Polynomial&)
 DESCRIPTION:       Overloaded stream extraction operator for Polynomial class
