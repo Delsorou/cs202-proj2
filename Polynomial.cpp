@@ -36,7 +36,7 @@ Polynomial::Polynomial()
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          Polynomial(Polynomial&)
+FUNCTION:          Polynomial(const Polynomial&)
 DESCRIPTION:       Copy constructor function for Polynomial class
 RETURNS:           N/A
 NOTES:             Constructs a polynomial from another
@@ -54,9 +54,9 @@ DESCRIPTION:       Default destructor function for Polynomial class
 RETURNS:           N/A
 NOTES:             None
 ----------------------------------------------------------------------------- */
-//Polynomial::~Polynomial()
-//{
-//}
+Polynomial::~Polynomial()
+{
+}
 
 /* -----------------------------------------------------------------------------
 FUNCTION:          operator>>(ifstream&, Polynomial&)

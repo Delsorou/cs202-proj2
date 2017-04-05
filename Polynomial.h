@@ -34,7 +34,7 @@ private:
 public:
 	Polynomial();
 	Polynomial(const Polynomial&);
-//	virtual ~Polynomial();
+	virtual ~Polynomial();
 	Polynomial& operator=(const Polynomial) noexcept;
 	Polynomial operator+(const Polynomial&);
 	Polynomial operator-(const Polynomial&);
