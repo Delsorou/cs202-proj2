@@ -32,7 +32,6 @@ int main(const int argc, const char* argv[])
     for (int n = 0; n < 2; ++n)
     {
 		std::cin >> poly[n];
-		std::cout << std::endl << poly[n];
     }
 	
 	std::cout << std::endl << poly[0](1) << std::endl;

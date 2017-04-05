@@ -76,10 +76,10 @@ NOTES:             None
 ----------------------------------------------------------------------------- */
 Polynomial& Polynomial::operator=(const Polynomial rVal) noexcept
 {
-	this->deg = rVal.deg;
+	deg = rVal.deg;
 	
-	for (int i = this->deg; i >= 0; --i)
-		this->cof[i] = rVal.cof[i];
+	for (int i = deg; i >= 0; --i)
+		cof[i] = rVal.cof[i];
 
 	return *this;
 }

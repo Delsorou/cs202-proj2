@@ -27,7 +27,6 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 
 class Polynomial
 {
-private:
     int deg;
     int cof[9];
 public:
@@ -46,12 +45,15 @@ public:
 	// Assignment operator overloads
 	Polynomial& operator=(const Polynomial) noexcept;
 	Polynomial operator+(const Polynomial&);
+	Polynomial operator+=(const Polynomial& rVal) { return *this + rVal; };
 	Polynomial operator-(const Polynomial&);
+	Polynomial operator-=(const Polynomial& rVal) { return *this - rVal; };
 	Polynomial operator*(const Polynomial&);
+	Polynomial operator*=(const Polynomial& rVal) { return *this * rVal; };
 	
 	// Comparison operator overloads
 	bool operator==(const Polynomial&);
-//	bool operator!=(const Polynomial& rVal) { return !(*this == rVal); };
+	bool operator!=(const Polynomial& rVal) { return !(*this == rVal); };
 
 	// Evaluation (function operator) overload
 	int operator()(const int);
