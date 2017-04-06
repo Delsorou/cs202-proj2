@@ -190,6 +190,24 @@ Polynomial& Polynomial::operator*=(const Polynomial& rVal)
 }
 
 /* -----------------------------------------------------------------------------
+FUNCTION:          operator--()
+DESCRIPTION:       Overloaded decrement operator
+RETURNS:           Polynomial&
+NOTES:             Differentiates polynomial
+----------------------------------------------------------------------------- */
+Polynomial& Polynomial::operator--()
+{
+	Polynomial prev(*this);
+	cof[deg] = 0;
+	deg -= 1;
+
+	for (int i = deg; i >= 0; --i)
+		cof[i] = prev.cof[i + 1] * (i + 1);
+
+	return *this;
+}
+
+/* -----------------------------------------------------------------------------
 FUNCTION:          operator==(const Polynomial&)
 DESCRIPTION:       Overloaded equivalency operator for Polynomial class
 RETURNS:           bool

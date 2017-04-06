@@ -42,7 +42,7 @@ public:
 	// Default destructor (placeholder - nothing to destroy yet)
 	virtual ~Polynomial();
 	
-	// Assignment operator overloads
+	// Operator overloads
 	Polynomial& operator=(const Polynomial) noexcept;
 	Polynomial operator+(const Polynomial&);
 	Polynomial& operator+=(const Polynomial&);
@@ -50,6 +50,9 @@ public:
 	Polynomial& operator-=(const Polynomial&);
 	Polynomial operator*(const Polynomial&);
 	Polynomial& operator*=(const Polynomial&);
+
+	// Increment/degrement overloads
+	Polynomial& operator--();
 	
 	// Comparison operator overloads
 	bool operator==(const Polynomial&);

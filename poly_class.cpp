@@ -59,10 +59,18 @@ int main(const int argc, const char* argv[])
 	cout << F_1 << "(using -=): " << *Poly2 << endl << endl;
 
 	// Demonstrate multiplication and compound multiplication assignment
-	cout << F_1 << "(f * g)(x) = " << *Poly0 * *Poly1 << endl;
+	cout << F_1 << "Q(x) = (f * g)(x) = " << *Poly0 * *Poly1 << endl;
 	*Poly2 = *Poly0;
 	*Poly2 *= *Poly1;
 	cout << F_1 << "(using *=): " << *Poly2 << endl << endl;
+
+	// Demonstrate differentiation
+	cout << F_1 << "Q'(x) = d/dx(Q(x)) = " << --*Poly2 << endl;
+	cout << F_1 << "Q''(x) = d/dx(Q'(x)) = " << --*Poly2 << endl;
+	cout << F_1 << "Q'''(x) = d/dx(Q''(x)) = " << --*Poly2 << endl;
+	cout << F_1 << "The climax of repeated operations... what a jerk!!!" <<
+		endl << endl;
+	*Poly2 = *Poly0 * *Poly1;
 
 	// Demonstrate equality and inequality
 	bool isEqual = *Poly0 == *Poly1;
@@ -87,7 +95,7 @@ int main(const int argc, const char* argv[])
 	cout << F_1 << "Please define: x = ";
 	int value = 0;
 	std::cin >> value;
-	cout << endl << endl;
+	cout << endl;
 
 	cout << F_1 << "f(x) = " << (*Poly0)(value) << " at x = " << value << endl;
 	cout << F_1 << "g(x) = " << (*Poly1)(value) << " at x = " << value << endl;
