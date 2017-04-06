@@ -20,7 +20,7 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 #include <iostream>
 #include <iomanip>
 
-#define F_1 setw(30)
+#define F_1 setw(40)
 
 /* -----------------------------------------------------------------------------
 FUNCTION:          main(const int, const char**)
@@ -67,10 +67,30 @@ int main(const int argc, const char* argv[])
 	// Demonstrate differentiation
 	cout << F_1 << "Q'(x) = d/dx(Q(x)) = " << --*Poly2 << endl;
 	cout << F_1 << "Q''(x) = d/dx(Q'(x)) = " << --*Poly2 << endl;
-	cout << F_1 << "Q'''(x) = d/dx(Q''(x)) = " << --*Poly2 << endl;
+	cout << F_1 << "J(x) = Q'''(x) = d/dx(Q''(x)) = " << --*Poly2 << endl;
 	cout << F_1 << "The climax of repeated operations... what a jerk!!!" <<
 		endl << endl;
-	*Poly2 = *Poly0 * *Poly1;
+
+	// Demonstrate indefinite integration (Brown v. Board? no, the math kind)
+	cout << F_1 << "First integral of J(x) = " << ++*Poly2 << endl;
+	Polynomial* Poly3 = new Polynomial(*Poly2);
+	cout << F_1 << "Second integral of J(x) = " << ++*Poly2 << endl;
+	cout << F_1 << "Third integral of J(x) = " << ++*Poly2 << endl << endl;
+
+	// Demonstrate definite integration
+	int val = 0;
+	cout << F_1 << "Define upper limit for integration: x = ";
+	std::cin >> val;
+	Poly3->sUpper(val);
+	cout << endl;
+	cout << F_1 << "Define lower limit for integration: x = ";
+	std::cin >> val;
+	Poly3->sLower(val);
+	cout << endl << endl;
+
+	cout << F_1 << "The definite first integration of J(x) = "
+		<< (*Poly3)++ << " from x = " << Poly3->gLower() << " to x = "
+		<< Poly3->gUpper() << endl << endl;
 
 	// Demonstrate equality and inequality
 	bool isEqual = *Poly0 == *Poly1;
@@ -89,20 +109,12 @@ int main(const int argc, const char* argv[])
 
 	cout << F_1 << "F(x) = f(x): " << std::boolalpha << isEqual << endl;
 	cout << F_1 << "F(x) != f(x): " << std::boolalpha << isInequal
-		<< std::noboolalpha << endl << endl;
-
-	// Demonstrate evaluation
-	cout << F_1 << "Please define: x = ";
-	int value = 0;
-	std::cin >> value;
-	cout << endl;
-
-	cout << F_1 << "f(x) = " << (*Poly0)(value) << " at x = " << value << endl;
-	cout << F_1 << "g(x) = " << (*Poly1)(value) << " at x = " << value << endl;
+		<< std::noboolalpha << endl;
 
 	delete Poly0;
 	delete Poly1;
 	delete Poly2;
+	delete Poly3;
    	delete eqTest;
 
 	return 0;

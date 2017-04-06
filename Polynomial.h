@@ -25,10 +25,14 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 // Includes
 #include <iostream>
 
+// Enum type for integration output
 class Polynomial
 {
+	int indefinite;
+	float upper;
+	float lower;
     int deg;
-    int cof[9];
+    float cof[9];
 public:
 	// Default constructor
 	Polynomial();
@@ -51,8 +55,10 @@ public:
 	Polynomial operator*(const Polynomial&);
 	Polynomial& operator*=(const Polynomial&);
 
-	// Increment/degrement overloads
+	// Increment/decrement overloads
 	Polynomial& operator--();
+	Polynomial& operator++();
+	int operator++(int);
 	
 	// Comparison operator overloads
 	bool operator==(const Polynomial&);
@@ -64,5 +70,11 @@ public:
 	// Friend functions for stream insertion/extraction
 	friend std::ostream& operator<<(std::ostream&, const Polynomial&);
 	friend std::istream& operator>>(std::istream&, Polynomial&);
+
+	// Upper and lower limit acc/mut functions for definite integration
+	void sUpper(int val) { upper = val; };
+	void sLower(int val) { lower = val; };
+	float gUpper() { return upper; };
+	float gLower() { return lower; };
 };
 #endif // POLYNOMIAL_H
