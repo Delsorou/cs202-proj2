@@ -15,65 +15,73 @@ Author                  Date               Version
 Aaryna Irwin            2017-03-17         0.1 - Initial
 
 ----------------------------------------------------------------------------- */
+
+// Includes
+#include <cmath>
 #include <iostream>
 #include "Polynomial.h"
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          get_poly()
-DESCRIPTION:       User input function
-RETURNS:           Void function
+FUNCTION:          Polynomial()
+DESCRIPTION:       Default constructor function for Polynomial class
+RETURNS:           N/A
 NOTES:             None
 ----------------------------------------------------------------------------- */
-void Polynomial::get_poly()
+Polynomial::Polynomial()
 {
-	std::cout << "\nEnter degree of polynomial: ";
-	std::cin >> deg;
-
-    std::cout << "\nEnter the " << deg+1 << " cofficients: ";
-
-    for (int i = deg; i >= 0; --i)
-        std::cin >> cof[i];
+	deg = 0;
+	for (int i = 8; i >= 0; --i)
+		cof[i] = 0;
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          display_poly()
-DESCRIPTION:       Print function
-RETURNS:           Void function
-NOTES:             None
+FUNCTION:          Polynomial(istream&)
+DESCRIPTION:       Construct directly from the stream
+RETURNS:           N/A
+NOTES:             Constructs a polynomial from stream input
 ----------------------------------------------------------------------------- */
-void Polynomial::display_poly()
+Polynomial::Polynomial(std::istream& in)
 {
-    std::cout << "\n\t";
-
-    for (int i = deg; i >= 0; --i)
-    {
-	if (i < deg)
-	{
-	    if (cof[i] >= 0) std::cout << " +";
-	    else std::cout << " ";
-	}
-	std::cout << cof[i];
-
-	if (i > 1) std::cout << "x^" << i;
-	if (i == 1) std::cout << "x";
-    }
-    std::cout << std::endl;
+	in >> *this;
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          Add_2_Polynomials(Polynomial, Polynomial)
-DESCRIPTION:       Add function
-RETURNS:           Void function
+FUNCTION:          Polynomial(const Polynomial&)
+DESCRIPTION:       Copy constructor function for Polynomial class
+RETURNS:           N/A
+NOTES:             Constructs a polynomial from another
+----------------------------------------------------------------------------- */
+Polynomial::Polynomial(const Polynomial& in)
+{
+	deg = in.deg;
+	for (int i = deg; i >= 0; --i)
+		cof[i] = in.cof[i];
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          ~Polynomial()
+DESCRIPTION:       Default destructor function for Polynomial class
+RETURNS:           N/A
 NOTES:             None
 ----------------------------------------------------------------------------- */
-void Polynomial::Add_2_Polynomials(Polynomial p0, Polynomial p1)
+Polynomial::~Polynomial()
 {
-    std::cout << "\nAdding the 2 polynomials: \n\n";
+}
 
-    deg = MAX(p0.deg, p1.deg); 
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator=(const Polynomial&)
+DESCRIPTION:       Overloaded assignment operator for Polynomial class
+RETURNS:           Polynomial
+NOTES:             None
+----------------------------------------------------------------------------- */
+Polynomial& Polynomial::operator=(const Polynomial rVal) noexcept
+{
+	deg = rVal.deg;
+	
+	for (int i = deg; i >= 0; --i)
+		cof[i] = rVal.cof[i];
 
-    for (int i = deg; i >= 0; i--)
-        cof[i] = cof[i] + cof[i];
+	return *this;
 }
 
 /* -----------------------------------------------------------------------------
@@ -82,14 +90,181 @@ DESCRIPTION:       Overloaded addition operator for Polynomial class
 RETURNS:           Polynomial
 NOTES:             None
 ----------------------------------------------------------------------------- */
-Polynomial Polynomial::operator+(const Polynomial& p1)
+Polynomial Polynomial::operator+(const Polynomial& rVal)
 {
-	Polynomial p2;
+	// Return value buffer
+	Polynomial lVal;
 
-	p2.deg = MAX(deg, p1.deg);
+	// Set degree of result
+	lVal.deg = MAX(deg, rVal.deg);
 
-	for (int i = p2.deg; i >= 0; --i)
-		p2.cof[i] = cof[i] + p1.cof[i];
+	// Add each coefficient of like terms
+	for (int i = lVal.deg; i >= 0; --i)
+		lVal.cof[i] = cof[i] + rVal.cof[i];
 
-	return p2;
+	return lVal;
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator+=(const Polynomial&)
+DESCRIPTION:       Overloaded compound addition assignment for Polynomial class
+RETURNS:           Polynomial&
+NOTES:             None
+----------------------------------------------------------------------------- */
+Polynomial& Polynomial::operator+=(const Polynomial& rVal)
+{
+	*this = *this + rVal;
+
+	return *this;
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator-(const Polynomial&)
+DESCRIPTION:       Overloaded subtraction operator for Polynomial class
+RETURNS:           Polynomial
+NOTES:             None
+----------------------------------------------------------------------------- */
+Polynomial Polynomial::operator-(const Polynomial& rVal)
+{
+	// Return value buffer
+	Polynomial lVal;
+	
+	// Set degree of result
+	lVal.deg = MAX(deg, rVal.deg);
+
+	// Subtract each coefficient of like terms
+	for (int i = lVal.deg; i >= 0; --i)
+		lVal.cof[i] = cof[i] - rVal.cof[i];
+
+	return lVal;
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator-=(const Polynomial&)
+DESCRIPTION:       Overloaded compound subtr assignment for Polynomial class
+RETURNS:           Polynomial&
+NOTES:             None
+----------------------------------------------------------------------------- */
+Polynomial& Polynomial::operator-=(const Polynomial& rVal)
+{
+	*this = *this - rVal;
+
+	return *this;
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator*(const Polynomial&)
+DESCRIPTION:       Overloaded multiplication operator for Polynomial class
+RETURNS:           Polynomial
+NOTES:             None
+----------------------------------------------------------------------------- */
+Polynomial Polynomial::operator*(const Polynomial& rVal)
+{
+	// Return value buffer
+	Polynomial lVal;
+	
+	// Set degree of result
+	lVal.deg = deg + rVal.deg;
+
+	// Multiply each coefficient of like terms
+	for (int i = deg; i >= 0; --i)
+	{
+		for (int j = rVal.deg; j >= 0; --j)
+			lVal.cof[i + j] += cof[i] * rVal.cof[j];
+	}
+
+	return lVal;
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator*=(const Polynomial&)
+DESCRIPTION:       Overloaded compound multipl assignment for Polynomial class
+RETURNS:           Polynomial&
+NOTES:             None
+----------------------------------------------------------------------------- */
+Polynomial& Polynomial::operator*=(const Polynomial& rVal)
+{
+	*this = *this * rVal;
+
+	return *this;
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator==(const Polynomial&)
+DESCRIPTION:       Overloaded equivalency operator for Polynomial class
+RETURNS:           bool
+NOTES:             None
+----------------------------------------------------------------------------- */
+bool Polynomial::operator==(const Polynomial& rVal)
+{
+	// Return value buffer
+	bool isEqual = false;
+	
+	if (deg == rVal.deg)
+	{
+		isEqual = true;
+		for (int i = deg; i >= 0; --i)
+		{
+			if (cof[i] != rVal.cof[i])
+				isEqual = false;
+		}
+	}	
+
+	return isEqual;
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator()(const int)
+DESCRIPTION:       Overloaded function call operator for Polynomial class
+RETURNS:           int
+NOTES:             Evaluates polynomial at x = rVal
+----------------------------------------------------------------------------- */
+int Polynomial::operator()(const int val)
+{
+	int result = 0;
+
+	for (int i = deg; i >= 0; --i)
+		result += pow(val, deg - i) * cof[i];
+
+	return result;
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator>>(istream&, Polynomial&)
+DESCRIPTION:       Overloaded stream extraction operator for Polynomial class
+RETURNS:           istream&
+NOTES:             None
+----------------------------------------------------------------------------- */
+std::istream& operator>>(std::istream& is, Polynomial& in)
+{
+	is >> in.deg;
+
+	for (int i = in.deg; i >= 0; --i)
+		is >> in.cof[i];
+
+	return is;
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator<<(ostream&, const Polynomial&)
+DESCRIPTION:       Overloaded stream insertion operator for Polynomial class
+RETURNS:           ostream&
+NOTES:             None
+----------------------------------------------------------------------------- */
+std::ostream& operator<<(std::ostream& os, const Polynomial& out)
+{
+    for (int i = out.deg; i >= 0; --i)
+    {
+		if (i < out.deg)
+		{
+		   	if (out.cof[i] >= 0) os << " +";
+			else os << " ";
+		}
+		os << out.cof[i];
+
+		if (i > 1) os << "x^" << i;
+		if (i == 1) os << "x";
+    }
+
+	return os;
 }
