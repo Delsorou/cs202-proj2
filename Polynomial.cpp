@@ -167,7 +167,7 @@ Polynomial Polynomial::operator-(const Polynomial& rVal)
 	
 	// Set degree of result
 	lVal.deg = MAX(deg, rVal.deg);
-	lVal.cof.resize(lVal.deg, 0.0);
+	lVal.cof.resize(deg + 1, 0.0);
 
 	// Subtract each coefficient of like terms
 	for (int i = lVal.deg; i >= 0; --i)
@@ -253,16 +253,17 @@ NOTES:             Integrates polynomial
 Polynomial& Polynomial::operator++()
 {
 	Polynomial prev(*this);
-	++deg;
+	cof.resize(++deg + 1, 0.0);
 	++indefinite;
 
-	for (int i = deg; i >= 0; --i)
+	for (int i = deg + 1; i >= 0; --i)
 		cof[i] = prev.cof[i - 1] / i;
 
 	cof[0] = 0;
 
 	return *this;
 }
+
 /* -----------------------------------------------------------------------------
 FUNCTION:          operator++(int)
 DESCRIPTION:       Overloaded increment operator
