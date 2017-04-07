@@ -206,7 +206,7 @@ Polynomial& Polynomial::operator--()
 {
 	Polynomial prev(*this);
 	cof[deg] = 0;
-	deg -= 1;
+	--deg;
 
 	for (int i = deg; i >= 0; --i)
 		cof[i] = prev.cof[i + 1] * (i + 1);
@@ -223,7 +223,7 @@ NOTES:             Integrates polynomial
 Polynomial& Polynomial::operator++()
 {
 	Polynomial prev(*this);
-	deg += 1;
+	++deg;
 	++indefinite;
 
 	for (int i = deg; i >= 0; --i)
@@ -236,10 +236,10 @@ Polynomial& Polynomial::operator++()
 /* -----------------------------------------------------------------------------
 FUNCTION:          operator++(int)
 DESCRIPTION:       Overloaded increment operator
-RETURNS:           int
-NOTES:             Integrates polynomial
+RETURNS:           float
+NOTES:             Definitely integrates polynomial
 ----------------------------------------------------------------------------- */
-int Polynomial::operator++(int ignore)
+float Polynomial::operator++(int ignore)
 {
 	float result = 0;
 
@@ -275,12 +275,12 @@ bool Polynomial::operator==(const Polynomial& rVal)
 /* -----------------------------------------------------------------------------
 FUNCTION:          operator()(const int)
 DESCRIPTION:       Overloaded function call operator for Polynomial class
-RETURNS:           int
-NOTES:             Evaluates polynomial at x = rVal
+RETURNS:           float
+NOTES:             Evaluates polynomial at x = param 
 ----------------------------------------------------------------------------- */
-int Polynomial::operator()(const int val)
+float Polynomial::operator()(const float val)
 {
-	int result = 0;
+	float result = 0;
 
 	for (int i = deg; i >= 0; --i)
 		result += pow(val, deg - i) * cof[i];
@@ -323,10 +323,7 @@ std::ostream& operator<<(std::ostream& os, const Polynomial& out)
 			}
 
 			if (out.indefinite && i < out.indefinite)
-			{
-				char constant = 'B' + (out.indefinite - i);
-				os << constant;
-			}
+				os << char('B' + out.indefinite - i);
 			else os << out.cof[i];
 			if (i > 1) os << "x^" << i;
 			if (i == 1) os << 'x';

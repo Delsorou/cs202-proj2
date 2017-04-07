@@ -78,7 +78,7 @@ int main(const int argc, const char* argv[])
 	cout << F_1 << "Third integral of J(x) = " << ++*Poly2 << endl << endl;
 
 	// Demonstrate definite integration
-	int val = 0;
+	float val = 0;
 	cout << F_1 << "Define upper limit for integration: x = ";
 	std::cin >> val;
 	Poly3->sUpper(val);
@@ -88,7 +88,7 @@ int main(const int argc, const char* argv[])
 	Poly3->sLower(val);
 	cout << endl << endl;
 
-	cout << F_1 << "The definite first integration of J(x) = "
+	cout << F_1 << "The definite integral of J(x) = "
 		<< (*Poly3)++ << " from x = " << Poly3->gLower() << " to x = "
 		<< Poly3->gUpper() << endl << endl;
 

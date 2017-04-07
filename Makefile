@@ -17,8 +17,7 @@ CFLAGS=-c -Wall -std=c++11
 LDFLAGS=
 SOURCES=Polynomial.cpp poly_class.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
-### DO NOT SHARE EXE NAME WITH SOURCE FILES ###
-EXECUTABLE=poly_test
+EXECUTABLE=poly_class
 
 all : $(SOURCES) $(EXECUTABLE)
 
@@ -29,4 +28,4 @@ $(EXECUTABLE) : $(OBJECTS)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean :
-	rm $(OBJECTS) $(EXECUTABLE)
+	rm $(OBJECTS); find . -name "$(EXECUTABLE)" ! -name "*.cpp" -type f -delete
