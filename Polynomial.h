@@ -74,8 +74,8 @@ public:
 	friend std::istream& operator>>(std::istream&, Polynomial&);
 
 	// Upper and lower limit acc/mut functions for definite integration
-	void sUpper(int val) { upper = val; };
-	void sLower(int val) { lower = val; };
+	void sUpper(float val) { upper = val; };
+	void sLower(float val) { lower = val; };
 	float gUpper() { return upper; };
 	float gLower() { return lower; };
 };

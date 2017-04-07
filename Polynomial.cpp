@@ -355,7 +355,10 @@ std::ostream& operator<<(std::ostream& os, const Polynomial& out)
 			}
 
 			if (out.indefinite && i < out.indefinite)
+			{
 				os << char('B' + out.indefinite - i);
+				if (out.indefinite > out.deg - i) os << '/' << i;
+			}
 			else os << out.cof[i];
 			if (i > 1) os << "x^" << i;
 			if (i == 1) os << 'x';

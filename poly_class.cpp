@@ -20,7 +20,7 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 #include <iostream>
 #include <iomanip>
 
-#define F_1 setw(40)
+#define F_1 setw(45)
 
 /* -----------------------------------------------------------------------------
 FUNCTION:          main(const int, const char**)
@@ -43,8 +43,8 @@ int main(const int argc, const char* argv[])
 	cout << endl << endl;
 	Polynomial* Poly2 = new Polynomial();
 
-	cout << std::right << F_1 << "f(x) = " <<  *Poly0 << endl
-		<< F_1 << "g(x) = " <<  *Poly1 << endl << endl;
+	cout << std::right << std::setprecision(2) << F_1 << "f(x) = " <<  *Poly0
+		<< endl << F_1 << "g(x) = " <<  *Poly1 << endl << endl;
 
 	// Demonstrate addition and compound addition assignment
 	cout << F_1 << "(f + g)(x) = " << *Poly0 + *Poly1 << endl;
