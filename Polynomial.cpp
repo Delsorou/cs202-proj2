@@ -18,6 +18,7 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 
 // Includes
 #include <cmath>
+#include <vector>
 #include <iostream>
 #include "Polynomial.h"
 
@@ -30,9 +31,10 @@ NOTES:             None
 Polynomial::Polynomial()
 {
 	indefinite = 0;
+	upper = 0.0;
+	lower = 0.0;
 	deg = 0;
-	for (int i = 8; i >= 0; --i)
-		cof[i] = 0;
+	cof.resize(deg + 1, 0.0);
 }
 
 /* -----------------------------------------------------------------------------
@@ -44,9 +46,10 @@ NOTES:             Constructs a polynomial from stream input
 Polynomial::Polynomial(std::istream& in)
 {	
 	indefinite = 0;
+	upper = 0.0;
+	lower = 0.0;
 	deg = 0;
-	for (int i = 8; i >= 0; --i)
-		cof[i] = 0;
+	cof.resize(deg + 1, 0.0);
 
 	in >> *this;
 }
@@ -60,9 +63,10 @@ NOTES:             Constructs a polynomial from another
 Polynomial::Polynomial(const Polynomial& in)
 {
 	indefinite = in.indefinite;
+	upper = in.upper;
+	lower = in.lower;
 	deg = in.deg;
-	for (int i = deg; i >= 0; --i)
-		cof[i] = in.cof[i];
+	cof = in.cof;
 }
 
 /* -----------------------------------------------------------------------------
@@ -78,15 +82,39 @@ Polynomial::~Polynomial()
 /* -----------------------------------------------------------------------------
 FUNCTION:          operator=(const Polynomial&)
 DESCRIPTION:       Overloaded assignment operator for Polynomial class
-RETURNS:           Polynomial
+RETURNS:           Polynomial&
 NOTES:             None
 ----------------------------------------------------------------------------- */
-Polynomial& Polynomial::operator=(const Polynomial rVal) noexcept
+Polynomial& Polynomial::operator=(const Polynomial& rVal)
 {
-	deg = rVal.deg;
-	
-	for (int i = deg; i >= 0; --i)
-		cof[i] = rVal.cof[i];
+	if (this != &rVal)
+	{
+		deg = rVal.deg;
+		indefinite = rVal.indefinite;
+		upper = rVal.upper;
+		lower = rVal.lower;
+		cof = rVal.cof;
+	}
+
+	return *this;
+}
+
+/* -----------------------------------------------------------------------------
+FUNCTION:          operator=(const Polynomial&&) noexcept
+DESCRIPTION:       Overloaded assignment operator for Polynomial class
+RETURNS:           Polynomial&
+NOTES:             None
+----------------------------------------------------------------------------- */
+Polynomial& Polynomial::operator=(Polynomial&& rVal) noexcept
+{
+	if (this != &rVal)
+	{
+		deg = rVal.deg;
+		indefinite = rVal.indefinite;
+		upper = rVal.upper;
+		lower = rVal.lower;
+		cof = rVal.cof;
+	}
 
 	return *this;
 }
@@ -104,6 +132,7 @@ Polynomial Polynomial::operator+(const Polynomial& rVal)
 
 	// Set degree of result
 	lVal.deg = MAX(deg, rVal.deg);
+	lVal.cof.resize(deg + 1, 0.0);
 
 	// Add each coefficient of like terms
 	for (int i = lVal.deg; i >= 0; --i)
@@ -138,6 +167,7 @@ Polynomial Polynomial::operator-(const Polynomial& rVal)
 	
 	// Set degree of result
 	lVal.deg = MAX(deg, rVal.deg);
+	lVal.cof.resize(lVal.deg, 0.0);
 
 	// Subtract each coefficient of like terms
 	for (int i = lVal.deg; i >= 0; --i)
@@ -172,6 +202,7 @@ Polynomial Polynomial::operator*(const Polynomial& rVal)
 	
 	// Set degree of result
 	lVal.deg = deg + rVal.deg;
+	lVal.cof.resize(lVal.deg + 1, 0.0);
 
 	// Multiply each coefficient of like terms
 	for (int i = deg; i >= 0; --i)
@@ -205,8 +236,7 @@ NOTES:             Differentiates polynomial
 Polynomial& Polynomial::operator--()
 {
 	Polynomial prev(*this);
-	cof[deg] = 0;
-	--deg;
+	cof.resize(deg--, 0.0);
 
 	for (int i = deg; i >= 0; --i)
 		cof[i] = prev.cof[i + 1] * (i + 1);
@@ -297,6 +327,7 @@ NOTES:             None
 std::istream& operator>>(std::istream& is, Polynomial& in)
 {
 	is >> in.deg;
+	in.cof.resize(in.deg + 1, 0.0);
 
 	for (int i = in.deg; i >= 0; --i)
 		is >> in.cof[i];

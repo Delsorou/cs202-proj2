@@ -23,6 +23,7 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 #define ARRAY_SIZE(a) sizeof(a)/sizeof(a[0])
 
 // Includes
+#include <vector>
 #include <iostream>
 
 // Enum type for integration output
@@ -32,7 +33,7 @@ class Polynomial
 	float upper;
 	float lower;
     int deg;
-    float cof[9];
+	std::vector<float> cof;
 public:
 	// Default constructor
 	Polynomial();
@@ -47,7 +48,8 @@ public:
 	virtual ~Polynomial();
 	
 	// Operator overloads
-	Polynomial& operator=(const Polynomial) noexcept;
+	Polynomial& operator=(const Polynomial&);
+	Polynomial& operator=(Polynomial&&) noexcept;
 	Polynomial operator+(const Polynomial&);
 	Polynomial& operator+=(const Polynomial&);
 	Polynomial operator-(const Polynomial&);
