@@ -26,7 +26,6 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 #include <vector>
 #include <iostream>
 
-// Enum type for integration output
 class Polynomial
 {
 	int indefinite;
