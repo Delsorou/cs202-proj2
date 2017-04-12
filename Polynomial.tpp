@@ -20,7 +20,6 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 #include <cmath>
 #include <vector>
 #include <iostream>
-#include "Polynomial.h"
 
 /* -----------------------------------------------------------------------------
 FUNCTION:          Polynomial()

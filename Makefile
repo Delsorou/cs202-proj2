@@ -29,4 +29,4 @@ $(EXECUTABLE) : $(OBJECTS)
 
 clean :
 	rm $(OBJECTS);\
-	find . -name "$(EXECUTABLE)" ! -name "*.cpp" -type f -delete;\
+	find . -name "$(EXECUTABLE)" ! -name "*.cpp" -type f -delete
