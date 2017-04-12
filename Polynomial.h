@@ -20,20 +20,29 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 
 // Macro definitions
 #define MAX(x,y) ((x) > (y) ? (x) : (y))
-#define ARRAY_SIZE(a) sizeof(a)/sizeof(a[0])
 
 // Includes
 #include <vector>
 #include <iostream>
 
-// Enum type for integration output
+// Forward declaration for templated friend function
+template <class T>
+class Polynomial;
+
+// Friend function prototypes
+template <class T>
+std::ostream& operator<<(std::ostream&, const Polynomial<T>&);
+template <class T>
+std::istream& operator>>(std::istream&, Polynomial<T>&);
+
+template <class T>
 class Polynomial
 {
 	int indefinite;
-	float upper;
-	float lower;
+	T upper;
+	T lower;
     int deg;
-	std::vector<float> cof;
+	std::vector<T> cof;
 public:
 	// Default constructor
 	Polynomial();
@@ -42,41 +51,42 @@ public:
 	Polynomial(std::istream&);
 
 	// Copy constructor
-	Polynomial(const Polynomial&);
+	Polynomial(const Polynomial<T>&);
 
 	// Default destructor (placeholder - nothing to destroy yet)
 	virtual ~Polynomial();
 	
 	// Operator overloads
-	Polynomial& operator=(const Polynomial&);
-	Polynomial& operator=(Polynomial&&) noexcept;
-	Polynomial operator+(const Polynomial&);
-	Polynomial& operator+=(const Polynomial&);
-	Polynomial operator-(const Polynomial&);
-	Polynomial& operator-=(const Polynomial&);
-	Polynomial operator*(const Polynomial&);
-	Polynomial& operator*=(const Polynomial&);
+	Polynomial<T>& operator=(const Polynomial<T>&);
+	Polynomial<T>& operator=(Polynomial<T>&&) noexcept;
+	Polynomial<T> operator+(const Polynomial<T>&);
+	Polynomial<T>& operator+=(const Polynomial<T>&);
+	Polynomial<T> operator-(const Polynomial<T>&);
+	Polynomial<T>& operator-=(const Polynomial<T>&);
+	Polynomial<T> operator*(const Polynomial<T>&);
+	Polynomial<T>& operator*=(const Polynomial<T>&);
 
 	// Increment/decrement overloads
-	Polynomial& operator--();
-	Polynomial& operator++();
-	float operator++(int);
+	Polynomial<T>& operator--();
+	Polynomial<T>& operator++();
+	T operator++(int);
 	
 	// Comparison operator overloads
-	bool operator==(const Polynomial&);
-	bool operator!=(const Polynomial& rVal) { return !(*this == rVal); };
+	bool operator==(const Polynomial<T>&);
+	bool operator!=(const Polynomial<T>& rVal) { return !(*this == rVal); };
 
 	// Evaluation (function operator) overload
-	float operator()(const float);
+	T operator()(const float);
 
 	// Friend functions for stream insertion/extraction
-	friend std::ostream& operator<<(std::ostream&, const Polynomial&);
-	friend std::istream& operator>>(std::istream&, Polynomial&);
+	friend std::ostream& operator<<<T>(std::ostream&, const Polynomial<T>&);
+	friend std::istream& operator>><T>(std::istream&, Polynomial<T>&);
 
 	// Upper and lower limit acc/mut functions for definite integration
-	void sUpper(float val) { upper = val; };
-	void sLower(float val) { lower = val; };
-	float gUpper() { return upper; };
-	float gLower() { return lower; };
+	void sUpper(T val) { upper = val; };
+	void sLower(T val) { lower = val; };
+	T gUpper() { return upper; };
+	T gLower() { return lower; };
 };
+#include "Polynomial.tpp"
 #endif // POLYNOMIAL_H
