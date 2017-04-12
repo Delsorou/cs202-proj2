@@ -28,7 +28,8 @@ DESCRIPTION:       Default constructor function for Polynomial class
 RETURNS:           N/A
 NOTES:             None
 ----------------------------------------------------------------------------- */
-Polynomial::Polynomial()
+template <class T>
+Polynomial<T>::Polynomial()
 {
 	indefinite = 0;
 	upper = 0.0;
@@ -43,7 +44,8 @@ DESCRIPTION:       Construct directly from the stream
 RETURNS:           N/A
 NOTES:             Constructs a polynomial from stream input
 ----------------------------------------------------------------------------- */
-Polynomial::Polynomial(std::istream& in)
+template <class T>
+Polynomial<T>::Polynomial(std::istream& in)
 {	
 	indefinite = 0;
 	upper = 0.0;
@@ -55,12 +57,13 @@ Polynomial::Polynomial(std::istream& in)
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          Polynomial(const Polynomial&)
+FUNCTION:          Polynomial(const Polynomial<T>&)
 DESCRIPTION:       Copy constructor function for Polynomial class
 RETURNS:           N/A
 NOTES:             Constructs a polynomial from another
 ----------------------------------------------------------------------------- */
-Polynomial::Polynomial(const Polynomial& in)
+template <class T>
+Polynomial<T>::Polynomial(const Polynomial<T>& in)
 {
 	indefinite = in.indefinite;
 	upper = in.upper;
@@ -75,17 +78,19 @@ DESCRIPTION:       Default destructor function for Polynomial class
 RETURNS:           N/A
 NOTES:             None
 ----------------------------------------------------------------------------- */
-Polynomial::~Polynomial()
+template <class T>
+Polynomial<T>::~Polynomial()
 {
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          operator=(const Polynomial&)
+FUNCTION:          operator=(const Polynomial<T>&)
 DESCRIPTION:       Overloaded assignment operator for Polynomial class
-RETURNS:           Polynomial&
+RETURNS:           Polynomial<T>&
 NOTES:             None
 ----------------------------------------------------------------------------- */
-Polynomial& Polynomial::operator=(const Polynomial& rVal)
+template <class T>
+Polynomial<T>& Polynomial<T>::operator=(const Polynomial<T>& rVal)
 {
 	if (this != &rVal)
 	{
@@ -100,12 +105,13 @@ Polynomial& Polynomial::operator=(const Polynomial& rVal)
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          operator=(const Polynomial&&) noexcept
+FUNCTION:          operator=(const Polynomial<T>&&) noexcept
 DESCRIPTION:       Overloaded assignment operator for Polynomial class
-RETURNS:           Polynomial&
+RETURNS:           Polynomial<T>&
 NOTES:             None
 ----------------------------------------------------------------------------- */
-Polynomial& Polynomial::operator=(Polynomial&& rVal) noexcept
+template <class T>
+Polynomial<T>& Polynomial<T>::operator=(Polynomial<T>&& rVal) noexcept
 {
 	if (this != &rVal)
 	{
@@ -120,15 +126,16 @@ Polynomial& Polynomial::operator=(Polynomial&& rVal) noexcept
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          operator+(const Polynomial&)
+FUNCTION:          operator+(const Polynomial<T>&)
 DESCRIPTION:       Overloaded addition operator for Polynomial class
-RETURNS:           Polynomial
+RETURNS:           Polynomial<T>
 NOTES:             None
 ----------------------------------------------------------------------------- */
-Polynomial Polynomial::operator+(const Polynomial& rVal)
+template <class T>
+Polynomial<T> Polynomial<T>::operator+(const Polynomial<T>& rVal)
 {
 	// Return value buffer
-	Polynomial lVal;
+	Polynomial<T> lVal;
 
 	// Set degree of result
 	lVal.deg = MAX(deg, rVal.deg);
@@ -142,12 +149,13 @@ Polynomial Polynomial::operator+(const Polynomial& rVal)
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          operator+=(const Polynomial&)
+FUNCTION:          operator+=(const Polynomial<T>&)
 DESCRIPTION:       Overloaded compound addition assignment for Polynomial class
-RETURNS:           Polynomial&
+RETURNS:           Polynomial<T>&
 NOTES:             None
 ----------------------------------------------------------------------------- */
-Polynomial& Polynomial::operator+=(const Polynomial& rVal)
+template <class T>
+Polynomial<T>& Polynomial<T>::operator+=(const Polynomial<T>& rVal)
 {
 	*this = *this + rVal;
 
@@ -155,15 +163,16 @@ Polynomial& Polynomial::operator+=(const Polynomial& rVal)
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          operator-(const Polynomial&)
+FUNCTION:          operator-(const Polynomial<T>&)
 DESCRIPTION:       Overloaded subtraction operator for Polynomial class
-RETURNS:           Polynomial
+RETURNS:           Polynomial<T>
 NOTES:             None
 ----------------------------------------------------------------------------- */
-Polynomial Polynomial::operator-(const Polynomial& rVal)
+template <class T>
+Polynomial<T> Polynomial<T>::operator-(const Polynomial<T>& rVal)
 {
 	// Return value buffer
-	Polynomial lVal;
+	Polynomial<T> lVal;
 	
 	// Set degree of result
 	lVal.deg = MAX(deg, rVal.deg);
@@ -177,12 +186,13 @@ Polynomial Polynomial::operator-(const Polynomial& rVal)
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          operator-=(const Polynomial&)
+FUNCTION:          operator-=(const Polynomial<T>&)
 DESCRIPTION:       Overloaded compound subtr assignment for Polynomial class
-RETURNS:           Polynomial&
+RETURNS:           Polynomial<T>&
 NOTES:             None
 ----------------------------------------------------------------------------- */
-Polynomial& Polynomial::operator-=(const Polynomial& rVal)
+template <class T>
+Polynomial<T>& Polynomial<T>::operator-=(const Polynomial<T>& rVal)
 {
 	*this = *this - rVal;
 
@@ -190,15 +200,16 @@ Polynomial& Polynomial::operator-=(const Polynomial& rVal)
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          operator*(const Polynomial&)
+FUNCTION:          operator*(const Polynomial<T>&)
 DESCRIPTION:       Overloaded multiplication operator for Polynomial class
-RETURNS:           Polynomial
+RETURNS:           Polynomial<T>
 NOTES:             None
 ----------------------------------------------------------------------------- */
-Polynomial Polynomial::operator*(const Polynomial& rVal)
+template <class T>
+Polynomial<T> Polynomial<T>::operator*(const Polynomial<T>& rVal)
 {
 	// Return value buffer
-	Polynomial lVal;
+	Polynomial<T> lVal;
 	
 	// Set degree of result
 	lVal.deg = deg + rVal.deg;
@@ -215,12 +226,13 @@ Polynomial Polynomial::operator*(const Polynomial& rVal)
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          operator*=(const Polynomial&)
+FUNCTION:          operator*=(const Polynomial<T>&)
 DESCRIPTION:       Overloaded compound multipl assignment for Polynomial class
-RETURNS:           Polynomial&
+RETURNS:           Polynomial<T>&
 NOTES:             None
 ----------------------------------------------------------------------------- */
-Polynomial& Polynomial::operator*=(const Polynomial& rVal)
+template <class T>
+Polynomial<T>& Polynomial<T>::operator*=(const Polynomial<T>& rVal)
 {
 	*this = *this * rVal;
 
@@ -230,12 +242,13 @@ Polynomial& Polynomial::operator*=(const Polynomial& rVal)
 /* -----------------------------------------------------------------------------
 FUNCTION:          operator--()
 DESCRIPTION:       Overloaded decrement operator
-RETURNS:           Polynomial&
+RETURNS:           Polynomial<T>&
 NOTES:             Differentiates polynomial
 ----------------------------------------------------------------------------- */
-Polynomial& Polynomial::operator--()
+template <class T>
+Polynomial<T>& Polynomial<T>::operator--()
 {
-	Polynomial prev(*this);
+	Polynomial<T> prev(*this);
 	cof.resize(deg--, 0.0);
 
 	for (int i = deg; i >= 0; --i)
@@ -247,12 +260,13 @@ Polynomial& Polynomial::operator--()
 /* -----------------------------------------------------------------------------
 FUNCTION:          operator++()
 DESCRIPTION:       Overloaded increment operator
-RETURNS:           Polynomial&
+RETURNS:           Polynomial<T>&
 NOTES:             Integrates polynomial
 ----------------------------------------------------------------------------- */
-Polynomial& Polynomial::operator++()
+template <class T>
+Polynomial<T>& Polynomial<T>::operator++()
 {
-	Polynomial prev(*this);
+	Polynomial<T> prev(*this);
 	cof.resize(++deg + 1, 0.0);
 	++indefinite;
 
@@ -267,12 +281,13 @@ Polynomial& Polynomial::operator++()
 /* -----------------------------------------------------------------------------
 FUNCTION:          operator++(int)
 DESCRIPTION:       Overloaded increment operator
-RETURNS:           float
+RETURNS:           T
 NOTES:             Definitely integrates polynomial
 ----------------------------------------------------------------------------- */
-float Polynomial::operator++(int ignore)
+template <class T>
+T Polynomial<T>::operator++(int ignore)
 {
-	float result = 0;
+	T result = 0;
 
 	result = (*this)(upper) - (*this)(lower);
 
@@ -280,12 +295,13 @@ float Polynomial::operator++(int ignore)
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          operator==(const Polynomial&)
+FUNCTION:          operator==(const Polynomial<T>&)
 DESCRIPTION:       Overloaded equivalency operator for Polynomial class
 RETURNS:           bool
 NOTES:             None
 ----------------------------------------------------------------------------- */
-bool Polynomial::operator==(const Polynomial& rVal)
+template <class T>
+bool Polynomial<T>::operator==(const Polynomial<T>& rVal)
 {
 	// Return value buffer
 	bool isEqual = false;
@@ -306,12 +322,13 @@ bool Polynomial::operator==(const Polynomial& rVal)
 /* -----------------------------------------------------------------------------
 FUNCTION:          operator()(const int)
 DESCRIPTION:       Overloaded function call operator for Polynomial class
-RETURNS:           float
+RETURNS:           T
 NOTES:             Evaluates polynomial at x = param 
 ----------------------------------------------------------------------------- */
-float Polynomial::operator()(const float val)
+template <class T>
+T Polynomial<T>::operator()(const float val)
 {
-	float result = 0;
+	T result = 0;
 
 	for (int i = deg; i >= 0; --i)
 		result += pow(val, deg - i) * cof[i];
@@ -320,12 +337,13 @@ float Polynomial::operator()(const float val)
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          operator>>(istream&, Polynomial&)
+FUNCTION:          operator>>(istream&, Polynomial<T>&)
 DESCRIPTION:       Overloaded stream extraction operator for Polynomial class
 RETURNS:           istream&
 NOTES:             None
 ----------------------------------------------------------------------------- */
-std::istream& operator>>(std::istream& is, Polynomial& in)
+template <class T>
+std::istream& operator>>(std::istream& is, Polynomial<T>& in)
 {
 	is >> in.deg;
 	in.cof.resize(in.deg + 1, 0.0);
@@ -337,12 +355,13 @@ std::istream& operator>>(std::istream& is, Polynomial& in)
 }
 
 /* -----------------------------------------------------------------------------
-FUNCTION:          operator<<(ostream&, const Polynomial&)
+FUNCTION:          operator<<(ostream&, const Polynomial<T>&)
 DESCRIPTION:       Overloaded stream insertion operator for Polynomial class
 RETURNS:           ostream&
 NOTES:             None
 ----------------------------------------------------------------------------- */
-std::ostream& operator<<(std::ostream& os, const Polynomial& out)
+template <class T>
+std::ostream& operator<<(std::ostream& os, const Polynomial<T>& out)
 {
     for (int i = out.deg; i >= 0; --i)
     {
@@ -355,7 +374,10 @@ std::ostream& operator<<(std::ostream& os, const Polynomial& out)
 			}
 
 			if (out.indefinite && i < out.indefinite)
+			{
 				os << char('B' + out.indefinite - i);
+				if (out.indefinite > out.deg - i) os << '/' << i;
+			}
 			else os << out.cof[i];
 			if (i > 1) os << "x^" << i;
 			if (i == 1) os << 'x';

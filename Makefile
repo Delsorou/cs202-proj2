@@ -15,7 +15,7 @@
 CC=g++
 CFLAGS=-c -Wall -std=c++11
 LDFLAGS=
-SOURCES=Polynomial.cpp poly_class.cpp
+SOURCES=poly_class.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=poly_class
 
@@ -28,4 +28,5 @@ $(EXECUTABLE) : $(OBJECTS)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean :
-	rm $(OBJECTS); find . -name "$(EXECUTABLE)" ! -name "*.cpp" -type f -delete
+	rm $(OBJECTS);\
+	find . -name "$(EXECUTABLE)" ! -name "*.cpp" -type f -delete;\

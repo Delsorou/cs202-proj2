@@ -20,7 +20,7 @@ Aaryna Irwin            2017-03-17         0.1 - Initial
 #include <iostream>
 #include <iomanip>
 
-#define F_1 setw(40)
+#define F_1 setw(45)
 
 /* -----------------------------------------------------------------------------
 FUNCTION:          main(const int, const char**)
@@ -36,15 +36,15 @@ int main(const int argc, const char* argv[])
 
 	// Demonstrate default and overloaded constructors
 	cout << "Enter the degree and coefficients for the polynomial f(x): ";
-	Polynomial* Poly0 = new Polynomial(std::cin);
+	Polynomial<float>* Poly0 = new Polynomial<float>(std::cin);
 	cout << endl;
 	cout << "Enter the degree and coefficients for the polynomial g(x): ";
-	Polynomial* Poly1 = new Polynomial(std::cin);
+	Polynomial<float>* Poly1 = new Polynomial<float>(std::cin);
 	cout << endl << endl;
-	Polynomial* Poly2 = new Polynomial();
+	Polynomial<float>* Poly2 = new Polynomial<float>();
 
-	cout << std::right << F_1 << "f(x) = " <<  *Poly0 << endl
-		<< F_1 << "g(x) = " <<  *Poly1 << endl << endl;
+	cout << std::right << std::setprecision(2) << F_1 << "f(x) = " <<  *Poly0
+		<< endl << F_1 << "g(x) = " <<  *Poly1 << endl << endl;
 
 	// Demonstrate addition and compound addition assignment
 	cout << F_1 << "(f + g)(x) = " << *Poly0 + *Poly1 << endl;
@@ -73,7 +73,7 @@ int main(const int argc, const char* argv[])
 
 	// Demonstrate indefinite integration (Brown v. Board? no, the math kind)
 	cout << F_1 << "First integral of J(x) = " << ++*Poly2 << endl;
-	Polynomial* Poly3 = new Polynomial(*Poly2);
+	Polynomial<float>* Poly3 = new Polynomial<float>(*Poly2);
 	cout << F_1 << "Second integral of J(x) = " << ++*Poly2 << endl;
 	cout << F_1 << "Third integral of J(x) = " << ++*Poly2 << endl << endl;
 
@@ -101,7 +101,7 @@ int main(const int argc, const char* argv[])
 
 	// Demonstrate copy construction
 	cout << F_1 << "F(x) = f(x)  " << endl;
-	Polynomial* eqTest = new Polynomial(*Poly0);
+	Polynomial<float>* eqTest = new Polynomial<float>(*Poly0);
 	
 	// Yep, equality and inequality totes work, yo!
 	isEqual = *Poly0 == *eqTest;
